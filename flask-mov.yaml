@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-mov-deployment
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: alvin89/flask-mov:3.0
+        ports:
+        - containerPort: 31212
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-mov-service
+spec:
+  ports:
+  - port: 81
+    targetPort: 31212
+    name: http
+    nodePort: 31212
+  selector:
+    app: flask
+  type: NodePort
