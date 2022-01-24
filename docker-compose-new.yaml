@@ -1,0 +1,15 @@
+version: '3.7'
+  
+services:
+  nginx_ui:
+    image: alvin89/nginx-ui:1.0
+    container_name: nginx_ui
+    ports:
+      - "0.0.0.0:80:80"
+
+  flask_mov2:
+    image: gasbugs/flask-example
+    container_name: flask_mov2
+    command: sleep infinity
+    ports:
+      - "0.0.0.0:31212:31212"
